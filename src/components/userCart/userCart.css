@@ -47,6 +47,11 @@
     padding-bottom: 10px;
     cursor: pointer;
 }
+.resume-btn-span.disabled {
+    pointer-events: none;
+    opacity: 0.9;
+    cursor:not-allowed;
+}
 .resume-btn-span:hover{
     background-color: #0056b3;
 }

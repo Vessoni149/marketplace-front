@@ -44,7 +44,7 @@ export const ProductDetail = ({ products }) => {
                         <h2 className="product-brand">{product.brand}</h2>
                         <p className="product-price">${product.price}</p>
                         <p className="product-description">{product.description}</p>
-                        <button className="add-to-cart" onClick={()=>{ handleAddToCart(productId, userId, setLoading); navigate('/user-cart')}}>Add to Cart</button>
+                        <button className="add-to-cart" onClick={()=>{ handleAddToCart(productId, userId, setLoading)}}>Add to Cart</button>
                         <p className="seller-info">Sold by: {product.sellerName}</p>
                     </div>
                 </div>

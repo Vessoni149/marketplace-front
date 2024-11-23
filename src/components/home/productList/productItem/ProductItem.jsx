@@ -110,8 +110,8 @@ const ProductItem = ({ product , btnBuyerOrSeller}) => {
                 {sortedImages.map((_, index) => (
                     <span
                         key={index}
-                        className={`dot ${currentSlide === index ? 'active' : ''}`} // Clase 'active' para el punto actual
-                        onClick={() => goToSlide(index)} // Actualiza el índice al hacer clic en un punto
+                        className={`dot ${currentSlide === index ? 'active' : ''}`} 
+                        onClick={() => goToSlide(index)} 
                     ></span>
                 ))}
             </div>

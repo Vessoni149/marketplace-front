@@ -1,4 +1,5 @@
-import axios from '../utils/axiosConfig';
+import axios from 'axios';
+
 //axios.defaults.baseURL = 'https://marketplace-users-ms.onrender.com';
 axios.defaults.baseURL = 'http://localhost:8081';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -30,4 +31,6 @@ export const request = (method, url, data) => {
         headers: headers,
         data: data});
 };
+
+export default axios;
 
