@@ -1,0 +1,26 @@
+.li-nav-bars {
+    list-style: none;
+    margin-left: -15px;
+    margin-right: 10px;
+}
+
+.list-item-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-item-container:hover .p-list-item,
+.list-item-container:hover .span-list-arrow {
+    cursor: pointer;
+    color: #9b9b9b;
+}
+
+.p-list-item {
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.span-list-arrow {
+    font-weight: bold;
+    color: #5c5c5c;
+}

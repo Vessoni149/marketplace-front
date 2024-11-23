@@ -1,0 +1,47 @@
+
+
+.label-cardType{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.payment-btn{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 35%;
+  height: 40px;
+  background-color: #007bff;
+  border-radius: 10px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.payment-btn:hover{
+  background-color: #0056b3;
+}
+
+@media screen and (min-width: 320px){
+  .payment-form{
+    width: 90%;
+    margin-left: 5%;
+    height: auto;
+    text-align: center;
+  }
+  .card-element-container{
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+
+@media screen and (min-width: 480px){
+  .card-element-container{
+    width: 80%;
+    margin-left: 10%;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .card-element-container{
+    width: 60%;
+    margin-left: 20%;
+  }
+}

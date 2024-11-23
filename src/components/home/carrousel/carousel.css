@@ -1,0 +1,28 @@
+.bg-carousel{
+    background-color: #ffe600;
+}
+.carousel-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 30px;
+    background-color: #ffe600;
+    display: flex;
+    justify-content: center;
+}
+.slick-slider{
+    display: flex;
+    justify-content: center;
+}
+.slick-initialized{
+    width: 95%;
+}
+
+.slick-slide img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.slick-prev, .slick-next{
+    width: 20px;
+}

@@ -1,0 +1,98 @@
+.menu-logo-container2{
+    display: flex;
+    width: 12em;
+    justify-content: space-between;
+    margin: auto;
+    
+}
+.logo-container2{
+    max-width: 8em;
+    display: flex;
+    
+}
+.logo2{
+width: 100%;
+height: auto;
+align-self: center;
+color: #fff;
+cursor: pointer;
+
+}
+.p-logo2{
+    position: relative;
+    color: #000;
+    font-size:xx-large;
+    font-weight: bold;
+    left: -1.0em;
+    top: -0.1em;
+    cursor: pointer;
+}
+
+.div-form{
+    margin-top: 2em;
+    border:solid #b7b7b7;
+    margin: auto;
+    padding: 1em;
+    margin-bottom: 15px;
+}
+
+.li-buttons{
+    display: flex;
+}
+
+.send-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.send-form-button{
+    width: 70%;
+}
+.password-registry{
+    font-weight: 300;
+}
+.password-registry-input-container {
+    position: relative; /* Para que el contenedor sea un contexto de posicionamiento */
+  }
+  
+  .password-registry-input-container input {
+    padding-right: 2.5rem; /* Agrega espacio a la derecha para que quepa el botón */
+  }
+  
+  .password-registry-input-container button {
+    width: 30px;
+    height: 30px;
+    position: absolute; /* Coloca el botón en posición absoluta */
+    top: 50%; /* Lo coloca en la mitad verticalmente */
+    right: 0.5rem; /* Lo posiciona a 0.5rem del borde derecho */
+    transform: translateY(-50%); /* Lo ajusta verticalmente en la mitad */
+    background: none; /* Quita el fondo del botón */
+    border: none; /* Quita el borde del botón */
+    cursor: pointer; /* Muestra el cursor como puntero */
+  }
+
+    @media screen and (min-width:320px) {
+    .div-form{
+        max-width: 90%;
+    }
+    }
+    @media screen and (min-width:480px) {
+        .div-form{
+            max-width: 75%;
+        }
+    }
+    @media screen and (min-width:600px) {
+        .div-form{
+            max-width: 60%;
+        }
+    }
+    @media screen and (min-width:768px) {
+        .div-form{
+            max-width: 50%;
+        }
+    }
+    @media screen and (min-width:1024px) {
+        .div-form{
+            max-width: 40%;
+        }
+    }

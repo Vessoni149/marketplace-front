@@ -1,0 +1,91 @@
+.lateral-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    background-color: rgb(242, 242, 242);
+    z-index: 2;
+    overflow-y: auto; /* Permite el scroll vertical si es necesario */
+    padding: 8px;
+}
+
+.title-barsMenu-container {
+    margin-left: -5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px; /* Espacio en la parte inferior */
+}
+
+.info-p-container{
+    background-color: #ffffff;
+    color: red;
+}
+
+
+
+.title-barsMenu-container:hover .li-see-all,
+.title-barsMenu-container:hover .span-arrow-down-barsMenu,
+.li-hys:hover {
+    cursor: pointer;
+    color: #9b9b9b;
+}
+
+.title-barsMenu {
+    margin-left: 5px;
+}
+
+.close-btn-barsMenu {
+    height: 70%;
+    font-size: larger;
+    font-weight: bold;
+    padding-right: 5px;
+    padding-left: 5px;
+    
+}
+
+.close-btn-barsMenu:hover {
+    cursor: pointer;
+    color: #9b9b9b;
+}
+
+.li-see-all {
+    list-style: none;
+}
+
+.span-arrow-down-barsMenu {
+    padding-left: 3px;
+    margin-left: 10px;
+    display: inline-block;
+    transform: rotate(90deg);
+    font-weight: bold;
+    font-size: large;
+    color: #5c5c5c;
+}
+
+.li-hys {
+    list-style: none;
+}
+
+
+@media screen and (min-width: 480px) {
+    .lateral-bar-container {
+        width: 50%; 
+    }
+}
+@media screen and (min-width: 600px) {
+    .lateral-bar-container {
+        width: 45%; 
+    }
+}
+@media screen and (min-width: 768px) {
+    .lateral-bar-container {
+        width: 35%; 
+    }
+}
+@media screen and (min-width: 1024px) {
+    .lateral-bar-container {
+        width: 25%; 
+    }
+}

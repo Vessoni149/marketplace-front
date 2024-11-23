@@ -1,0 +1,306 @@
+
+.top-background{
+    height: 45vh;
+    background-color: #f3f3f3;
+}
+
+.step-container{
+    height: 7vh;
+    padding-top: 3vh;
+    padding-left: 10vw;
+
+}
+.h4-img-container{
+    max-width: 80%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.bot-background{
+    background-color: #e8e8e3;
+    width: 100%;
+    position: absolute;
+}
+
+
+/*------------------------ step 1 ------------------------*/
+
+.product-form-container-step1{
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #fff;
+    border-radius: .375em;
+    padding: 10px;
+
+}
+.product-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    
+}
+.form-title-step1{
+    align-self: flex-start;
+    padding-right: 10px;
+    padding-left: 20px;
+}
+.label-input-form-container{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.product-form-label{
+    font-size: small;
+    font-weight: 400;
+    
+}
+
+.product-form-input{
+    border-radius: .375em;
+    margin-bottom: 10px;
+}
+
+.product-form-btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.product-form-btn{
+    border-radius: .375em;
+    background-color: #007bff;
+    border-color: transparent;
+    color: #fff;
+    margin-left: 5px;
+}
+.product-form-btn:hover{
+    background-color: #0056b3;
+}
+
+.price-amount-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+/*------------------------- step 2 --------------------------*/
+.product-form-container-step2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #fff;
+    border-radius: .375em;
+    padding: 10px;
+
+}
+.features-h5-p-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.features-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.features-form-p{
+    font-size: smaller;
+}
+
+
+.ta-description{
+    resize: none;
+    height: 15vh;
+    font-size: small;
+}
+.product-form-btn-container{
+    margin-top: 10px;
+}
+
+
+
+/*--------------------------- step 3 --------------------------*/
+.product-form-container-step3{
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #fff;
+    border-radius: .375em;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.file-upload {
+    width: 80%;
+    border: 2px dashed #f98787;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload-label {
+    font-size: 16px;
+}
+
+.file-upload p {
+    margin: 5px 0;
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.thumbnail {
+    position: relative;
+    padding-bottom: 5px;
+    width: 45%;
+}
+
+.thumbnails-img{
+    width: 100%;
+    height: auto;
+}
+
+.thumbnail-btn {
+    position: absolute;
+    font-size: small;
+    top: 5px;
+    right: 5px;
+    background-color: #ffdd00;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+.upload-thumbnail{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    height: auto;
+    cursor: pointer;
+    padding-bottom: 5px;
+}
+.upload-img{
+    width: 100%;
+    height: auto;
+}
+
+/*---------------------------- media querys ----------------------------*/
+
+
+@media screen and (min-width: 320px){
+    .product-form-container-step1, .product-form-container-step2, .product-form-container-step3{
+        width: 70%;
+        margin-top: -5%;
+        margin-bottom: 5%;
+    }
+
+    .thumbnail, .upload-thumbnail{
+        width: 45%;
+        margin: 2%;
+    }
+
+}
+@media screen and (min-width: 480px){
+    .product-form-container-step1{
+        height: 100%;
+        width: 50%;
+        top: -10%;
+    }
+    .product-form-container-step2{
+        height: 80%;
+        width: 60%;
+        top: -10%;
+    }
+    .product-form-label{
+        margin-top: 8px;
+    }
+}
+@media screen and (min-width: 600px){
+    .product-form-container-step1 {
+        height: 100%;
+        width: 40%;
+    }
+    .product-form-container-step2{
+        height: 75%;
+        width: 45%;
+    }
+    .product-form-container-step3{
+        width: 85%;
+    }
+    .thumbnail, .upload-thumbnail{
+        width: 30%;
+        margin: 1%;
+    }
+}
+@media screen and (min-width: 768px){
+    .h4-img-container{
+        width: 70%;
+        flex-direction: row;
+        margin-left: 15%;
+        justify-content: space-evenly;
+    }
+    .product-form-container-step1{
+        top: -10%;
+        width: 45%;
+        height: 80%;
+    }
+    .product-form-container-step2{
+        height: 70%;
+        width: 40%;
+    }
+    .features-form{
+        margin-top: -20px;
+    }
+    .price-amount-container{
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .price-div, .amount-div{
+        width: 40%;
+    }
+    .thumbnail, .upload-thumbnail{
+        width: 22%;
+    }
+}
+@media screen and (min-width: 1024px){
+    .product-form-container-step1{
+        width: 40%;
+        height: 75%;
+    }
+    .product-form-container-step2{
+        height: 65%;
+        width: 35%;
+    }
+    .product-form-container-step3{
+        width: 70%;
+    }
+    .features-form-container{
+        height: 100%;
+        
+    }
+}

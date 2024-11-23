@@ -1,0 +1,119 @@
+/* Contenedor de toda la navbar */
+.nav-bar-container{
+    width: 100%;
+    height: 12vh;
+    background-color: #1f1f1f;
+}
+/* contenedor de la parte superior del navbar: */
+/* Parte superior izquierda: */
+.container1{
+display: flex;
+justify-content: space-between;
+margin-left: 0.5em;
+}
+.menu-logo-container{
+    display: flex;
+    width: 12em;
+    justify-content: space-between;
+    
+}
+.menu{
+    width: 2em;
+    margin-top: 1.2em;
+
+}
+.icon-bars{
+    width: 100%;
+    height: auto;
+    color: #fff;
+    cursor:pointer;
+}
+
+.logo-container{
+    max-width: 8em;
+    display: flex;
+    margin-top: 0.5em;
+    cursor:pointer;
+}
+.logo{
+width: 100%;
+height: auto;
+align-self: center;
+color: #fff;
+
+}
+.p-logo{
+    position: relative;
+    color: #fff;
+    font-size: x-large;
+    font-weight: bold;
+    left: -1em;
+    top:0.6em
+}
+
+/* Parte superior derecha: */
+.user-cart-container{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0.5em;
+    width: 5.5em;
+}
+.user-icon-container{
+    max-width: 2em;
+    display: flex;
+}
+.cart-icon-container{
+    max-width: 2em;
+    display: flex;
+    position: relative;
+}
+.user, .cart{
+    width: 100%;
+    height: auto;
+    align-self: center;
+    color: #fff;
+    cursor:pointer;
+}
+
+
+
+.user-menu {
+    position: absolute;
+    top: 8%; /* Posición vertical debajo del ícono */
+    right: 0;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2; /* Asegura que esté encima de otros elementos */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para el botón de login/register dentro del menú */
+.login-register-btn {
+    padding: 8px 16px;
+    margin-top: 8px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-register-btn:hover {
+    background-color: #0056b3;
+}
+
+.welcome-menu{
+    text-align: center;
+}
+
+.account-list{
+    list-style: none;
+}
+.account-list li:hover{
+    cursor: pointer;
+    color:#007bff;
+}
