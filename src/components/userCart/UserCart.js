@@ -20,7 +20,7 @@ export function UserCart() {
     const [totalProducts, setTotalProducts] = useState(0);
     const [shipping, setShipping] = useState(0);
     const initializedRef = useRef(false);
-    const [cart, setCart] = useState(null);
+    const [cart, setCart] = useState([]);
     const [step, setStep] = useState(1);
     const [errorMessage, setErrorMessage] = useState(null);  
     const navigate = useNavigate();
@@ -165,7 +165,7 @@ const options = {
     useEffect(() => {
         if (cart) {
             const calculateShipping = () => {
-                if (pickupSelected || totalPrice > 1000) {
+                if (pickupSelected || totalPrice > 1000 || cart.length === 0) {
                     return 0;
                 } else {
                     return 200;
@@ -329,7 +329,7 @@ const options = {
                 <div className='cart-container'>
                     
                     {
-                    cart !== null ? (
+                    cart.length > 0 ? (
                     cart.map((i) => (
                         <ProductCartItem 
                         key={i.code} 
@@ -410,7 +410,7 @@ const options = {
                     </div>
                     <div className='resume-shipping'>
                         <p>Shipping</p>
-                        {shipping === 0 ? (
+                        {(shipping === 0 || cart.length === 0)  ? (
                             <p className='free'>Free</p>
                             ) : (
                             <p>$ {shipping}</p>
@@ -422,10 +422,15 @@ const options = {
                     </div>
                         <div className='resume-btn'>
                         {step === 1 && (
-                            <span className='resume-btn-span'
-                            onClick={()=>{setStep(2)}}
-                            >Continue shopping</span>
-                        )}
+                            <span
+                            className={`resume-btn-span ${!cart || cart.length < 1 ? 'disabled' : ''}`}
+                            onClick={() => {
+                                if (cart && cart.length > 0) setStep(2);
+                        }}
+        >
+            Continue shopping
+        </span>
+    )}
                         {step === 2 && (
                         <div className='resume-btns-2'> 
                         <button className='resume-btn-buy-back >'

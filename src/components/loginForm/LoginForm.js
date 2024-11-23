@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from '../../utils/axiosConfig';
+import axios from '../../utils/AxiosHelper';
 import { setAuthHeader } from '../../utils/AxiosHelper';
 import fetchUserRoles from '../../utils/fetchUserRoles';
 import {jwtDecode} from 'jwt-decode';
