@@ -35,8 +35,8 @@ function App() {
   const fetchProducts = async () => {
     try {
       
-        const response = await fetch('http://localhost:8084/products/get', {
-        //const response = await fetch('https://marketplace-products-ms.onrender.com/products/get', {
+        //const response = await fetch('http://localhost:8084/products/get', {
+        const response = await fetch('https://marketplace-products-ms.onrender.com/products/get', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

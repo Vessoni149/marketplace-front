@@ -17,7 +17,7 @@ export const handleAddToCart = async (productCode, userId, setLoading) => {
     try {
        
         const response = await axios.put(
-            `http://localhost:8081/products/add/${userId}/${productCode}`,
+            `https://marketplace-users-ms.onrender.com/products/add/${userId}/${productCode}`,
             null,{
             headers: {
                 'Authorization': `Bearer ${jwtToken}`,

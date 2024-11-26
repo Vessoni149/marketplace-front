@@ -113,7 +113,7 @@ export function SellProduct() {
         
 
         try {
-            const response = await axios.post('http://localhost:8084/products/create', formDataToSend, {
+            const response = await axios.post('https://marketplace-products-ms.onrender.com/products/create', formDataToSend, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,
                 },

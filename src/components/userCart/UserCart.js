@@ -11,9 +11,9 @@ import { validateAddressFields } from '../../utils/validations.js';
 import stripePromise from '../../utils/stripe.js';
 import { PaymentForm } from './Payment/PaymentForm.js'; 
 import { Elements } from '@stripe/react-stripe-js';
-import axios from 'axios';
+import axios from '../../utils/AxiosHelper.js'
 
-//const backUrl= 'https://marketplace-users-ms.onrender.com';
+
 export function UserCart() {
 
     const [totalPrice, setTotalPrice] = useState(0);
@@ -65,7 +65,7 @@ const options = {
                 id: item.productName
             }));
     
-            const response = await axios.post('http://localhost:8081/create-payment-intent', {
+            const response = await axios.post('/create-payment-intent', {
                 amount: totalPrice, 
                 items: items
             }, {
@@ -105,7 +105,7 @@ const options = {
             }
             try {
                 
-                const response = await fetch(`http://localhost:8081/products/get/${userId}`, {
+                const response = await fetch(`https://marketplace-products-ms.onrender.com/products/get/${userId}`, {
                 //const response = await fetch(`${backUrl}/products/get/${userId}`, {
                     method: 'GET',
                     headers: {
@@ -138,14 +138,11 @@ const options = {
             try {
             const userId = localStorage.getItem('user_id');
             const jwtToken = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:8081/addresses/get/${userId}`, {
-            //const response = await fetch(`${backUrl}/addresses/get/${userId}`, {
-                method: 'GET',
+            const response = await axios.get(`addresses/get/${userId}`, {
                 headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${jwtToken}`,
                 },
-            credentials: 'include',
             });
             if (response.ok) {
                 const addressesFromAPI = await response.json();
@@ -217,7 +214,7 @@ const options = {
         const jwtToken = localStorage.getItem('token');
     
         try {
-            const response = await axios.post(`http://localhost:8081/addresses/addAddress/${userId}`, 
+            const response = await axios.post(`/addresses/addAddress/${userId}`, 
                 { 
                     ...currentAddress 
                 },
@@ -283,7 +280,7 @@ const options = {
             const updatedAddresses = prevAddresses.filter((_, index) => index !== addressIndex);
             localStorage.setItem('addresses', JSON.stringify(updatedAddresses));
             const deleteFromAPI = async () => {
-                const response = await axios.delete(`http://localhost:8081/addresses/delete/${userId}/${addressToDelete.id}`, {
+                const response = await axios.delete(`/addresses/delete/${userId}/${addressToDelete.id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${jwtToken}`,
