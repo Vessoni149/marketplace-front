@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import axios from 'axios';
+import axios from '../utils/AxiosHelper';
 
 export const handleAddToCart = async (productCode, userId, setLoading) => {
     if (userId === null) {
@@ -17,7 +17,7 @@ export const handleAddToCart = async (productCode, userId, setLoading) => {
     try {
        
         const response = await axios.put(
-            `https://marketplace-users-ms.onrender.com/products/add/${userId}/${productCode}`,
+            `/products/add/${userId}/${productCode}`,
             null,{
             headers: {
                 'Authorization': `Bearer ${jwtToken}`,

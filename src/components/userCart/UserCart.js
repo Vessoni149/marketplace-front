@@ -105,9 +105,7 @@ const options = {
             }
             try {
                 
-                const response = await fetch(`https://marketplace-products-ms.onrender.com/products/get/${userId}`, {
-                //const response = await fetch(`${backUrl}/products/get/${userId}`, {
-                    method: 'GET',
+                const response = await axios.get(`/products/get/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${jwtToken}`,
                     },
@@ -140,7 +138,6 @@ const options = {
             const jwtToken = localStorage.getItem('token');
             const response = await axios.get(`addresses/get/${userId}`, {
                 headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${jwtToken}`,
                 },
             });
@@ -220,7 +217,6 @@ const options = {
                 },
                 {
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${jwtToken}`,
                     },
                     credentials: 'include',
@@ -282,7 +278,6 @@ const options = {
             const deleteFromAPI = async () => {
                 const response = await axios.delete(`/addresses/delete/${userId}/${addressToDelete.id}`, {
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${jwtToken}`,
                     },
                     credentials: 'include',
