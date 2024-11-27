@@ -42,9 +42,7 @@ export function ProductCartItem({cartItem, setCart, cart}) {
             const response = await axios.put(`/products/delete/${userId}/${productCode}`, null, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,
-                    'Content-Type': 'application/json'
                 },
-                credentials: 'include',
             });
             
             console.log(response);

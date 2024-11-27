@@ -117,7 +117,6 @@ export function SellProduct() {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,
                 },
-                credentials: 'include',
             });
             
         

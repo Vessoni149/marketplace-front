@@ -288,7 +288,7 @@ export const validateContactNumber = (contactNumber) => {
 };
 export const validateBetweenStreet = (street) => {
     if (street) {
-        const invalidChars = /["'<>_!=(){}|°\-+*/:;.%$&?]/;
+        const invalidChars = /["'<>_!=(){}|°\-+*/:;%$&?]/;
 
         if (invalidChars.test(street)) {
             return "Between street cannot contain certain special characters";
