@@ -279,28 +279,36 @@ const options = {
             const userId = localStorage.getItem('user_id');
             const jwtToken = localStorage.getItem('token');
             const addressToDelete = addresses[addressIndex];
-            setAddresses((prevAddresses) => {
-            const updatedAddresses = prevAddresses.filter((_, index) => index !== addressIndex);
+    
+            // Actualizar la vista primero
+            const updatedAddresses = addresses.filter((_, index) => index !== addressIndex);
+            setAddresses(updatedAddresses); 
             localStorage.setItem('addresses', JSON.stringify(updatedAddresses));
-            const deleteFromAPI = async () => {
-                const response = await axios.delete(`http://localhost:8081/addresses/delete/${userId}/${addressToDelete.id}`, {
+    
+            // Realizar la llamada a la API
+            const response = await axios.delete(
+                `http://localhost:8081/addresses/delete/${userId}/${addressToDelete.id}`,
+                {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${jwtToken}`,
                     },
                     credentials: 'include',
-                });
-                if (response.status !== 200) {
-                    console.error('Error deleting address from API:', response.statusText);
                 }
-            };
-            deleteFromAPI();
-            return updatedAddresses;
-            });
+            );
+    
+            if (response.status !== 200) {
+                console.error('Error deleting address from API:', response.statusText);
+            }
         } catch (error) {
             console.error('Error deleting address:', error);
+    
+            // Opcional: Restaurar el estado si la eliminación falla
+            setAddresses((prevAddresses) => [...prevAddresses, addresses[addressIndex]]);
+            localStorage.setItem('addresses', JSON.stringify(addresses));
         }
     };
+    
 
     if (loading && cart === null) {
         return <div className='loading'>Loading...</div>;
