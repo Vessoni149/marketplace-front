@@ -10,6 +10,8 @@ import { SellProduct } from './components/postSell/products/SellProduct';
 import { UserCart } from './components/userCart/UserCart';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import {productsUrl} from './utils/AxiosHelper';
+import axios from './utils/AxiosHelper';
 
 export const AuthContext = createContext();
 
@@ -32,26 +34,18 @@ function App() {
     return [];
   });
   
-  const fetchProducts = async () => {
+ const fetchProducts = async () => {
+    setLoading(true);
     try {
-      
-        //const response = await fetch('http://localhost:8084/products/get', {
-        const response = await fetch('https://marketplace-products-ms.onrender.com/products/get', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        });
-        if (response.ok) {
-            const data = await response.json();
+        const { data, status } = await axios.get(`${productsUrl}/products/get`);
+        if (status === 200) {
             setProducts(data);
-            setLoading(false);
         } else {
-            console.error('Error fetching products:', response.status);
+            throw new Error(`HTTP error! status: ${status}`);
         }
-        } catch (error) {
+    } catch (error) {
         console.error('Error fetching products:', error);
-    } finally{
+    } finally {
         setLoading(false);
     }
 };

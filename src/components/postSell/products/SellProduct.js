@@ -9,7 +9,8 @@ import upload from '../../../assets/subir.png';
 import Swal from 'sweetalert2';
 import { validateProductForm, validatePhotoFormat, validatePhotoSize } from '../../../utils/validations';
 import { AuthContext } from '../../../App';
-import axios from 'axios';
+import axios from '../../../utils/AxiosHelper';
+import {productsUrl} from '../../../utils/AxiosHelper';
 
 export function SellProduct() {
     const { fetchProducts} = useContext(AuthContext);
@@ -113,7 +114,7 @@ export function SellProduct() {
         
 
         try {
-            const response = await axios.post('https://marketplace-products-ms.onrender.com/products/create', formDataToSend, {
+            const response = await axios.post(`${productsUrl}/products/create`, formDataToSend, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,
                 },

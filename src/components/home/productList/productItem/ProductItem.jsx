@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../../../App';
 import { useNavigate } from 'react-router-dom';
 import { handleAddToCart } from '../../../../utils/cartUtil';
-import axios from 'axios';
+import axios from '../../../../utils/AxiosHelper';
+import {productsUrl} from '../../../../utils/AxiosHelper';
 
 const ProductItem = ({ product , btnBuyerOrSeller}) => {
 
@@ -54,12 +55,10 @@ const ProductItem = ({ product , btnBuyerOrSeller}) => {
         if(isAuthenticated){
                 try {
                     const jwtToken = localStorage.getItem('token');
-                            const response = await axios.delete(`https://marketplace-products-ms.onrender.com/products/delete/${productCode}`, {
+                            const response = await axios.delete(`${productsUrl}/products/delete/${productCode}`, {
                                 headers: {
                                     'Authorization': `Bearer ${jwtToken}`,
-                                    'Content-Type': 'application/json'
                                 },
-                                credentials: 'include',
                             });
                             
                     if (response.status === 200) {
