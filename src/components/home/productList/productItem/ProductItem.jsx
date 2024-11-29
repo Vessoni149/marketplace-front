@@ -54,7 +54,7 @@ const ProductItem = ({ product , btnBuyerOrSeller}) => {
         if(isAuthenticated){
                 try {
                     const jwtToken = localStorage.getItem('token');
-                            const response = await axios.delete(`https://marketplace-products-ms.onrender.co/products/delete/${productCode}`, {
+                            const response = await axios.delete(`https://marketplace-products-ms.onrender.com/products/delete/${productCode}`, {
                                 headers: {
                                     'Authorization': `Bearer ${jwtToken}`,
                                     'Content-Type': 'application/json'

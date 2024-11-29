@@ -71,7 +71,6 @@ const options = {
             }, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`, 
-                    'Content-Type': 'application/json', 
                 }
             });
             
@@ -108,10 +107,9 @@ const options = {
                     headers: {
                         'Authorization': `Bearer ${jwtToken}`,
                     },
-                    withCredentials: true, // Cambia credentials: 'include' por esto
+                    withCredentials: true, 
                 });
         
-                // No necesitas .ok o .json() con axios, usa response.data
                 setCart(response.data);
                 localStorage.setItem('cart', JSON.stringify(response.data));
             } catch (error) {
@@ -139,14 +137,14 @@ const options = {
             }
         
             try {
-                // Realiza la solicitud al servidor
+                
                 const response = await axios.get(`/addresses/get/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${jwtToken}`,
                     },
                 });
         
-                // Almacena las direcciones obtenidas
+                
                 const addressesFromAPI = response.data; 
                 setAddresses(addressesFromAPI);
                 localStorage.setItem('addresses', JSON.stringify(addressesFromAPI));
@@ -272,28 +270,28 @@ const options = {
     };
 
     const handleDeleteAddress = async (addressIndex) => {
+        const userId = localStorage.getItem('user_id');
+        const jwtToken = localStorage.getItem('token');
+        const addressToDelete = addresses[addressIndex];
+    
         try {
-            const userId = localStorage.getItem('user_id');
-            const jwtToken = localStorage.getItem('token');
-            const addressToDelete = addresses[addressIndex];
-            setAddresses((prevAddresses) => {
-            const updatedAddresses = prevAddresses.filter((_, index) => index !== addressIndex);
-            localStorage.setItem('addresses', JSON.stringify(updatedAddresses));
-            const deleteFromAPI = async () => {
-                const response = await axios.delete(`/addresses/delete/${userId}/${addressToDelete.id}`, {
+            const response = await axios.delete(
+                `addresses/delete/${userId}/${addressToDelete.id}`,
+                {
                     headers: {
-                        'Authorization': `Bearer ${jwtToken}`,
-                    },
-                });
-                if (response.status !== 200) {
-                    console.error('Error deleting address from API:', response.statusText);
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
                 }
-            };
-            deleteFromAPI();
-            return updatedAddresses;
-            });
+            );
+    
+            if (response.status === 200) {
+                const updatedAddresses = addresses.filter((_, index) => index !== addressIndex);
+                setAddresses(updatedAddresses);
+                localStorage.setItem('addresses', JSON.stringify(updatedAddresses));
+            }
         } catch (error) {
             console.error('Error deleting address:', error);
+            // Mostrar mensaje al usuario sobre el error
         }
     };
 
