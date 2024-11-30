@@ -19,10 +19,6 @@ const ProductItem = ({ product , btnBuyerOrSeller}) => {
     const navigate = useNavigate();
 
 
-    
-
-
-
     const truncateDescription = (text, maxLength) => {
         const trimmedText = text.replace(/\n/g, ' ');
         if (trimmedText.length <= maxLength) {
@@ -62,7 +58,7 @@ const ProductItem = ({ product , btnBuyerOrSeller}) => {
                             });
                             
                     if (response.status === 200) {
-                        fetchProducts();
+                        await fetchProducts();
                         Swal.fire({
                             position: "top-end",
                             icon: "success",

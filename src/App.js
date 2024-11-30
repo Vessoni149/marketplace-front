@@ -36,7 +36,6 @@ function App() {
   });
   
   const fetchProducts = async () => {
-    if (products.length > 0) return; 
     setLoading(true);
     try {
         const { data, status } = await axios.get(`${productsUrl}/products/get`);
