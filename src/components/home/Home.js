@@ -28,7 +28,7 @@ export function Home({setCart, cart}) {
         setInputValue(value);
         setFilter(value);
 
-        if(value.lenght === 0){
+        if(value.length === 0){
             setInputValue("Busca en Amazon' t");
             setInputClass('input-light-text');
         }

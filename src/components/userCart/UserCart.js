@@ -11,16 +11,16 @@ import { validateAddressFields } from '../../utils/validations.js';
 import stripePromise from '../../utils/stripe.js';
 import { PaymentForm } from './Payment/PaymentForm.js'; 
 import { Elements } from '@stripe/react-stripe-js';
-import axios from 'axios';
+import axios from '../../utils/AxiosHelper.js'
 
-//const backUrl= 'https://marketplace-users-ms.onrender.com';
+
 export function UserCart() {
 
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalProducts, setTotalProducts] = useState(0);
     const [shipping, setShipping] = useState(0);
     const initializedRef = useRef(false);
-    const [cart, setCart] = useState(null);
+    const [cart, setCart] = useState([]);
     const [step, setStep] = useState(1);
     const [errorMessage, setErrorMessage] = useState(null);  
     const navigate = useNavigate();
@@ -46,10 +46,10 @@ export function UserCart() {
     });
 
 
-const options = {
-    clientSecret,
-    appearance: {/* ... configuración de apariencia ... */},
-  };
+    const options = {
+        clientSecret,
+        appearance: {/* ... configuración de apariencia ... */},
+    };
 
     const handlePayment = async () => {
         setIsSubmitting(true);
@@ -65,13 +65,12 @@ const options = {
                 id: item.productName
             }));
     
-            const response = await axios.post('http://localhost:8081/create-payment-intent', {
+            const response = await axios.post('/create-payment-intent', {
                 amount: totalPrice, 
                 items: items
             }, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`, 
-                    'Content-Type': 'application/json', 
                 }
             });
             
@@ -104,24 +103,18 @@ const options = {
                 return;
             }
             try {
-                
-                const response = await fetch(`http://localhost:8081/products/get/${userId}`, {
-                //const response = await fetch(`${backUrl}/products/get/${userId}`, {
-                    method: 'GET',
+                const response = await axios.get(`/products/get/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${jwtToken}`,
                     },
-                    credentials: 'include',
+                    withCredentials: true, 
                 });
-                if (response.ok) {
-                    const cartData = await response.json();
-                    setCart(cartData);
-                    localStorage.setItem('cart', JSON.stringify(cartData));
-                } else {
-                    console.error('Error fetching cart:', response.statusText);
-                }
+        
+                setCart(response.data);
+                localStorage.setItem('cart', JSON.stringify(response.data));
             } catch (error) {
                 console.error('Error fetching cart:', error);
+                setErrorMessage('Failed to fetch cart. Please try again later.');
             } finally {
                 setLoading(false);
             }
@@ -135,27 +128,31 @@ const options = {
 
     useEffect(() => {
         const fetchAddressesFromAPI = async () => {
-            try {
             const userId = localStorage.getItem('user_id');
             const jwtToken = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:8081/addresses/get/${userId}`, {
-            //const response = await fetch(`${backUrl}/addresses/get/${userId}`, {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${jwtToken}`,
-                },
-            credentials: 'include',
-            });
-            if (response.ok) {
-                const addressesFromAPI = await response.json();
+        
+            if (!userId || !jwtToken) {
+                console.error('Error: User not logged in or token is missing.');
+                return;
+            }
+        
+            try {
+                
+                const response = await axios.get(`/addresses/get/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${jwtToken}`,
+                    },
+                });
+        
+                
+                const addressesFromAPI = response.data; 
                 setAddresses(addressesFromAPI);
                 localStorage.setItem('addresses', JSON.stringify(addressesFromAPI));
-                } else {
-                console.error('Error fetching addresses from API:', response.statusText);
-            }
             } catch (error) {
-            console.error('Error fetching addresses from API: There are not addresses for this user', error);
+                console.error(
+                    'Error fetching addresses from API. There are no addresses for this user:',
+                    error.response?.data || error.message
+                );
             }
         };
         fetchAddressesFromAPI();
@@ -165,7 +162,7 @@ const options = {
     useEffect(() => {
         if (cart) {
             const calculateShipping = () => {
-                if (pickupSelected || totalPrice > 1000) {
+                if (pickupSelected || totalPrice > 1000 || cart.length === 0) {
                     return 0;
                 } else {
                     return 200;
@@ -217,16 +214,14 @@ const options = {
         const jwtToken = localStorage.getItem('token');
     
         try {
-            const response = await axios.post(`http://localhost:8081/addresses/addAddress/${userId}`, 
+            const response = await axios.post(`/addresses/addAddress/${userId}`, 
                 { 
                     ...currentAddress 
                 },
                 {
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${jwtToken}`,
                     },
-                    credentials: 'include',
                 }
             );
             
@@ -275,37 +270,28 @@ const options = {
     };
 
     const handleDeleteAddress = async (addressIndex) => {
+        const userId = localStorage.getItem('user_id');
+        const jwtToken = localStorage.getItem('token');
+        const addressToDelete = addresses[addressIndex];
+    
         try {
-            const userId = localStorage.getItem('user_id');
-            const jwtToken = localStorage.getItem('token');
-            const addressToDelete = addresses[addressIndex];
-    
-            // Actualizar la vista primero
-            const updatedAddresses = addresses.filter((_, index) => index !== addressIndex);
-            setAddresses(updatedAddresses); 
-            localStorage.setItem('addresses', JSON.stringify(updatedAddresses));
-    
-            // Realizar la llamada a la API
             const response = await axios.delete(
-                `http://localhost:8081/addresses/delete/${userId}/${addressToDelete.id}`,
+                `addresses/delete/${userId}/${addressToDelete.id}`,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${jwtToken}`,
-                    },
-                    credentials: 'include',
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
                 }
             );
     
-            if (response.status !== 200) {
-                console.error('Error deleting address from API:', response.statusText);
+            if (response.status === 200) {
+                const updatedAddresses = addresses.filter((_, index) => index !== addressIndex);
+                setAddresses(updatedAddresses);
+                localStorage.setItem('addresses', JSON.stringify(updatedAddresses));
             }
         } catch (error) {
             console.error('Error deleting address:', error);
-    
-            // Opcional: Restaurar el estado si la eliminación falla
-            setAddresses((prevAddresses) => [...prevAddresses, addresses[addressIndex]]);
-            localStorage.setItem('addresses', JSON.stringify(addresses));
+            // Mostrar mensaje al usuario sobre el error
         }
     };
     
@@ -337,7 +323,7 @@ const options = {
                 <div className='cart-container'>
                     
                     {
-                    cart !== null ? (
+                    cart.length > 0 ? (
                     cart.map((i) => (
                         <ProductCartItem 
                         key={i.code} 
@@ -418,7 +404,7 @@ const options = {
                     </div>
                     <div className='resume-shipping'>
                         <p>Shipping</p>
-                        {shipping === 0 ? (
+                        {(shipping === 0 || cart.length === 0)  ? (
                             <p className='free'>Free</p>
                             ) : (
                             <p>$ {shipping}</p>
@@ -430,10 +416,15 @@ const options = {
                     </div>
                         <div className='resume-btn'>
                         {step === 1 && (
-                            <span className='resume-btn-span'
-                            onClick={()=>{setStep(2)}}
-                            >Continue shopping</span>
-                        )}
+                            <span
+                            className={`resume-btn-span ${!cart || cart.length < 1 ? 'disabled' : ''}`}
+                            onClick={() => {
+                                if (cart && cart.length > 0) setStep(2);
+                        }}
+        >
+            Continue shopping
+        </span>
+    )}
                         {step === 2 && (
                         <div className='resume-btns-2'> 
                         <button className='resume-btn-buy-back >'

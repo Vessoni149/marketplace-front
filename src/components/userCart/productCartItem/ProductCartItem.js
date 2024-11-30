@@ -1,6 +1,7 @@
 import React, {  useState, useEffect } from 'react'
 import './productCartItem.css';
-import axios from 'axios';
+import axios from '../../../utils/AxiosHelper';
+
 
 export function ProductCartItem({cartItem, setCart, cart}) {
     const [selectedAmount, setSelectedAmount] = useState(cartItem.selectedAmount || 1);
@@ -38,12 +39,10 @@ export function ProductCartItem({cartItem, setCart, cart}) {
         const jwtToken = localStorage.getItem('token');
         setIsDeleting(true);
         try {
-            const response = await axios.put(`http://localhost:8081/products/delete/${userId}/${productCode}`, null, {
+            const response = await axios.put(`/products/delete/${userId}/${productCode}`, null, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,
-                    'Content-Type': 'application/json'
                 },
-                credentials: 'include',
             });
             
             console.log(response);

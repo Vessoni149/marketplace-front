@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../../../App';
 import { useNavigate } from 'react-router-dom';
 import { handleAddToCart } from '../../../../utils/cartUtil';
-import axios from 'axios';
+import axios from '../../../../utils/AxiosHelper';
+import {productsUrl} from '../../../../utils/AxiosHelper';
 
 const ProductItem = ({ product , btnBuyerOrSeller}) => {
 
@@ -54,15 +55,10 @@ const ProductItem = ({ product , btnBuyerOrSeller}) => {
         if(isAuthenticated){
                 try {
                     const jwtToken = localStorage.getItem('token');
-                    
-                    
-                        //const response = await fetch(`https://marketplace-products-ms.onrender.com/products/delete/${productCode}`, {
-                            const response = await axios.delete(`http://localhost:8084/products/delete/${productCode}`, {
+                            const response = await axios.delete(`${productsUrl}/products/delete/${productCode}`, {
                                 headers: {
                                     'Authorization': `Bearer ${jwtToken}`,
-                                    'Content-Type': 'application/json'
                                 },
-                                credentials: 'include',
                             });
                             
                     if (response.status === 200) {
@@ -110,8 +106,8 @@ const ProductItem = ({ product , btnBuyerOrSeller}) => {
                 {sortedImages.map((_, index) => (
                     <span
                         key={index}
-                        className={`dot ${currentSlide === index ? 'active' : ''}`} // Clase 'active' para el punto actual
-                        onClick={() => goToSlide(index)} // Actualiza el índice al hacer clic en un punto
+                        className={`dot ${currentSlide === index ? 'active' : ''}`} 
+                        onClick={() => goToSlide(index)} 
                     ></span>
                 ))}
             </div>

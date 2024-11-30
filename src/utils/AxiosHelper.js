@@ -1,8 +1,11 @@
-import axios from '../utils/axiosConfig';
-//axios.defaults.baseURL = 'https://marketplace-users-ms.onrender.com';
-axios.defaults.baseURL = 'http://localhost:8081';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://marketplace-users-ms.onrender.com';
+//axios.defaults.baseURL = 'http://localhost:8081';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.withCredentials = true;
+export const productsUrl = 'https://marketplace-products-ms.onrender.com';
+//export const productsUrl = 'http://localhost:8084';
 
 export const getAuthToken = () => {
     return window.localStorage.getItem('token');
@@ -30,4 +33,6 @@ export const request = (method, url, data) => {
         headers: headers,
         data: data});
 };
+
+export default axios;
 
