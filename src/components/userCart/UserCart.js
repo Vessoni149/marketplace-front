@@ -294,6 +294,7 @@ const options = {
             // Mostrar mensaje al usuario sobre el error
         }
     };
+    
 
     if (loading && cart === null) {
         return <div className='loading'>Loading...</div>;

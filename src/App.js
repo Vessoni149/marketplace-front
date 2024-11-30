@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import {productsUrl} from './utils/AxiosHelper';
 import axios from './utils/AxiosHelper';
 
+
 export const AuthContext = createContext();
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
     return [];
   });
   
- const fetchProducts = async () => {
+  const fetchProducts = async () => {
+    if (products.length > 0) return; 
     setLoading(true);
     try {
         const { data, status } = await axios.get(`${productsUrl}/products/get`);
@@ -49,6 +51,7 @@ function App() {
         setLoading(false);
     }
 };
+
 
 
   useEffect(() => {
