@@ -109,9 +109,10 @@ export function UserCart() {
                     },
                     withCredentials: true, 
                 });
-        
-                setCart(response.data);
-                localStorage.setItem('cart', JSON.stringify(response.data));
+                if (response.status === 200){
+                    setCart(response.data);
+                    localStorage.setItem('cart', JSON.stringify(response.data));
+                }
             } catch (error) {
                 console.error('Error fetching cart:', error);
                 setErrorMessage('Failed to fetch cart. Please try again later.');
@@ -137,22 +138,16 @@ export function UserCart() {
             }
         
             try {
-                
                 const response = await axios.get(`/addresses/get/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${jwtToken}`,
                     },
                 });
-        
-                
                 const addressesFromAPI = response.data; 
                 setAddresses(addressesFromAPI);
                 localStorage.setItem('addresses', JSON.stringify(addressesFromAPI));
             } catch (error) {
-                console.error(
-                    'Error fetching addresses from API. There are no addresses for this user:',
-                    error.response?.data || error.message
-                );
+                
             }
         };
         fetchAddressesFromAPI();
@@ -326,7 +321,7 @@ export function UserCart() {
                     cart.length > 0 ? (
                     cart.map((i) => (
                         <ProductCartItem 
-                        key={i.code} 
+                        
                         cartItem={i} 
                         cart={cart}
                         setCart={setCart}

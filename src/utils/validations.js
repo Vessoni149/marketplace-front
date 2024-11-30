@@ -27,11 +27,11 @@ export const validateProductForm = (form)=>{
     }
 
     //Validar que productName, brand y description, tengan entre x e y caracteres:
-    if (!(form.productName.length >= 3 && form.productName.length <= 25) || !(form.brand.length >= 3 && form.brand.length <= 25)) {
+    if (!(form.productName.length >= 2 && form.productName.length <= 45) || !(form.brand.length >= 2 && form.brand.length <= 25)) {
         Swal.fire({
             icon: "warning",
             title: "Warning in the fields 'Product Name/Brand'",
-            text: "Fields 'Product Name' and 'brand' must have between 3 and 25 characters."
+            text: "Fields 'Product Name' and 'brand' must have between 2 and 25 characters."
         });
         return false;
     }
@@ -46,7 +46,8 @@ export const validateProductForm = (form)=>{
     
     //validar que los campos productName, brand y description no tengan caracteres especiales.
     // eslint-disable-next-line
-    const specialCharactersRegex = /[`!@#$%^&*|_+\-=[]\[\]{};\\|<>?~]/;
+    const specialCharactersRegex = /[`!@#$^&*()_\-=\[\]{};':"\\|<>\/?~]/;
+
     if (
         specialCharactersRegex.test(form.productName) ||
         specialCharactersRegex.test(form.brand) ||
