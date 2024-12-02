@@ -1,5 +1,5 @@
 .product_card {
-  margin: 0.25em; /* Reduce el margen alrededor de cada tarjeta */
+  margin: 0.25em; 
   border: 1px solid #ddd;
   overflow: hidden;
   width: 100%;
@@ -26,7 +26,7 @@
   min-width: 100%;
   box-sizing: border-box;
   position: relative;
-  padding-top: 75%; /* Mantiene la proporción 4:3 (ajusta según tus necesidades) */
+  padding-top: 75%; 
 }
 
 .slide img {
@@ -35,18 +35,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Asegura que la imagen se ajuste dentro del contenedor manteniendo su proporción */
+  object-fit: contain; 
 }
 
 .product_btn {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 5px 10px; /* Reduce el padding del botón */
+  padding: 5px 10px; 
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 5px; /* Reduce el margen superior del botón */
-  font-size: 0.8em; /* Reduce el tamaño de fuente del botón */
+  margin-top: 5px; 
+  font-size: 0.8em; 
   transition: background-color 0.3s;
 }
 
@@ -86,13 +86,13 @@
 .dots {
   display: flex;
   justify-content: center;
-  margin-top: 5px; /* Reduce el margen superior del contenedor de puntos */
+  margin-top: 5px; 
 }
 
 .dot {
-  height: 8px; /* Reduce el tamaño de los puntos de navegación */
-  width: 8px; /* Reduce el tamaño de los puntos de navegación */
-  margin: 0 3px; /* Reduce el margen entre los puntos */
+  height: 8px; 
+  width: 8px;
+  margin: 0 3px; 
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
@@ -108,26 +108,29 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: auto; /* Reduce la altura total del contenedor de información */
+  
   padding: 0.5em;
 }
-
+.product_name{
+  min-height: 35px;
+}
 .product_name, .product_brand, .product_seller_p {
   margin: 0;
-  font-size: 0.9em; /* Reduce el tamaño de fuente */
+  font-size: 0.9em; 
 }
+
 .seller_name{
   font-weight: 500;
 }
 .product_description {
   flex-grow: 0;
-  margin-bottom: 3px; /* Reduce el margen inferior */
-  margin-top: 3px; /* Reduce el margen superior */
-  height: 80px; /* Reduce la altura de la descripción */
+  margin-bottom: 3px; 
+  margin-top: 3px; 
+  height: 80px; 
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Ajusta este valor según la cantidad de líneas deseadas */
+  -webkit-line-clamp: 3; 
   -webkit-box-orient: vertical;
   cursor: pointer;
 }
@@ -139,12 +142,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto; /* Empuja este contenedor hacia el fondo del .product_info */
+  margin-top: auto; 
 }
 
 .product_price {
   font-weight: bold;
-  font-size: 0.9em; /* Reduce el tamaño de fuente */
+  font-size: 0.9em; 
 }
 
 .product_btn {
@@ -153,6 +156,6 @@
 
 @media screen and (min-width: 480px) {
   .product_card {
-    width: 12em; /* Reduce el ancho de las tarjetas en pantallas grandes */
+    width: 12em; 
   }
 }
